@@ -60,3 +60,8 @@ This app uses:
 
 If you use this app or its data for research, please cite GBIF and ESDB appropriately.
 
+
+<div align="center">
+  <strong>Made with ❤️ by Sarvagna</strong>
+</div> 
+
