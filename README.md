@@ -44,6 +44,12 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+5. **Download Required Datasets**
+   - Download the necessary soil and microbe datasets (e.g., shapefiles, DBF files, CSVs) and place them in the `data/` directory as described above.
+   - See the [Data Sources](#-data-sources) section for links and citation information.
+   - If you do not have access to these datasets, the app will not function correctly.
+
+
 3. Run the application:
 ```bash
 python app.py
@@ -51,10 +57,6 @@ python app.py
 
 4. Open your browser and navigate to `http://localhost:5000`
    
-5. **Download Required Datasets**
-   - Download the necessary soil and microbe datasets (e.g., shapefiles, DBF files, CSVs) and place them in the `data/` directory as described above.
-   - See the [Data Sources](#-data-sources) section for links and citation information.
-   - If you do not have access to these datasets, the app will not function correctly.
 
 
 ## 📚 Data Sources
