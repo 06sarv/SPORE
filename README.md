@@ -9,7 +9,7 @@ This application predicts probable soil microbes based on soil characteristics, 
   - **Organic Carbon Content** (30–100): Percentage of organic carbon in topsoil (higher values indicate more organic matter) 
   - **Available Water Capacity** (34–100): Percentage of water that soil can hold for plant and microbial use 
   - **Cation Exchange Capacity** (40–100): Soil's ability to hold and supply nutrients (higher values indicate better nutrient retention) 
-  - **Soil pH** (1–5): Soil acidity/alkalinity (1: Very acidic to 5: Very alkaline) 
+  - **Soil pH** (1–5): Soil acidity/alkalinity 
     
 - Predicts probable soil microbes
   
