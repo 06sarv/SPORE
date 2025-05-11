@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2c149887-59d3-4ac7-9750-318fadd4d226)# 🌱 Soil Microbe Predictor - Poland 🇵🇱
+# 🌱 Soil Microbe Predictor - Poland 🇵🇱
 
 This application predicts probable soil microbes based on soil characteristics, specifically for Polish soils. 
 
