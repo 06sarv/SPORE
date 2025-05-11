@@ -1,4 +1,4 @@
-# 🌱 Soil Microbe Predictor - Poland 🇵🇱
+# 🌱 Soil Microbe Predictor - Poland 
 
 This application predicts probable soil microbes based on soil characteristics, specifically for Polish soils. 
 
