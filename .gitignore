@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+.env.*
+
+# Data
+/data/
+*.dbf
+*.shp
+*.shx
+*.prj
+*.cpg
+*.csv
+
+# OS
+.DS_Store
+Thumbs.db 

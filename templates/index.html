@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Microbe Predictor - Poland</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: none;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: url('/static/691739e723d27184cf047233a4fa1c0d.jpg') repeat;
+            background-size: 500px 500px;
+            filter: blur(3px) brightness(1.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 32px 24px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0, 180, 216, 0.12), 0 1.5px 6px rgba(0,0,0,0.04);
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .input-section {
+            margin-bottom: 36px;
+        }
+        h2 {
+            color: #388e3c;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        .input-group {
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #388e3c;
+        }
+        .input-description {
+            font-size: 0.97em;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #a5d6a7;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f1f8e9;
+            transition: border 0.2s;
+        }
+        input[type="number"]:focus {
+            border: 1.5px solid #43a047;
+            outline: none;
+            background: #e8f5e9;
+        }
+        .range-info {
+            font-size: 0.89em;
+            color: #888;
+            margin-top: 5px;
+        }
+        button {
+            background: linear-gradient(90deg, #43a047 0%, #81c784 100%);
+            color: white;
+            padding: 12px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #2e7d32 0%, #43a047 100%);
+            box-shadow: 0 4px 16px rgba(56,142,60,0.13);
+        }
+        #results {
+            margin-top: 36px;
+            padding: 0;
+            border-radius: 10px;
+            background: none;
+        }
+        .microbe-item {
+            margin-bottom: 22px;
+            padding: 18px 22px 14px 18px;
+            background: #f1f8e9;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.07);
+            border-left: 6px solid #43a047;
+            transition: box-shadow 0.2s, background 0.2s;
+            position: relative;
+        }
+        .microbe-item:hover {
+            background: #e8f5e9;
+            box-shadow: 0 6px 24px rgba(56,142,60,0.13);
+        }
+        .microbe-item strong {
+            color: #388e3c;
+            font-size: 1.13em;
+        }
+        .expand-hint {
+            color: #2e7d32;
+            font-size: 0.93em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .microbe-explanation {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-top: 12px;
+            color: #222;
+            font-size: 1em;
+            box-shadow: 0 1px 4px rgba(76,175,80,0.07);
+            border-left: 4px solid #43a047;
+            transition: background 0.2s;
+        }
+        .error {
+            color: #e74c3c;
+            padding: 12px;
+            margin: 12px 0;
+            background-color: #fde8e8;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px 2vw;
+            }
+            .microbe-item {
+                padding: 12px 8px 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Soil Microbe Predictor - Poland</h1>
+        
+        <div class="input-section">
+            <h2>Enter Soil Characteristics</h2>
+            <p style="margin-bottom: 18px; color: #555; font-size: 1em;">Default values are set to the mean for Poland. You can adjust them to match your own soil sample or scenario.</p>
+            <form id="prediction-form">
+                {% for feature_code, feature in features.items() %}
+                <div class="input-group">
+                    <label for="{{ feature_code }}">{{ feature.name }}</label>
+                    <div class="input-description">{{ feature.description }}</div>
+                    <input type="number" 
+                           id="{{ feature_code }}" 
+                           name="{{ feature_code }}" 
+                           step="any" 
+                           required
+                           min="{{ feature_info[feature_code].min }}"
+                           max="{{ feature_info[feature_code].max }}"
+                           value="{{ feature_info[feature_code].mean|round(2) }}">
+                    <div class="range-info">
+                        Valid range: {{ feature_info[feature_code].min|round(2) }} to {{ feature_info[feature_code].max|round(2) }}
+                        (Mean: {{ feature_info[feature_code].mean|round(2) }})
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit">Predict Microbes</button>
+            </form>
+        </div>
+
+        <div id="results" style="display: none;">
+            <h2 style="color:#007c91;">Predicted Microbes</h2>
+            <div id="predictions"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {};
+            {% for feature_code, feature in features.items() %}
+            formData['{{ feature_code }}'] = parseFloat(document.getElementById('{{ feature_code }}').value);
+            {% endfor %}
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                const resultsDiv = document.getElementById('results');
+                const predictionsDiv = document.getElementById('predictions');
+                predictionsDiv.innerHTML = '';
+                if (data.microbes.length > 0) {
+                    data.microbes.forEach((microbe, idx) => {
+                        const microbeDiv = document.createElement('div');
+                        microbeDiv.className = 'microbe-item';
+                        microbeDiv.style.cursor = 'pointer';
+                        microbeDiv.innerHTML = `
+                            <strong>${microbe.name}</strong>
+                            <div>Probability: ${(microbe.probability * 100).toFixed(1)}%</div>
+                            <div>${microbe.explanation}</div>
+                            <div class="microbe-explanation" id="explanation-${idx}" style="display:none; margin-top:10px;"></div>
+                            <div class="expand-hint" id="expand-hint-${idx}">Click for survival explanation</div>
+                        `;
+                        microbeDiv.addEventListener('click', async function() {
+                            const expDiv = document.getElementById(`explanation-${idx}`);
+                            const hintDiv = document.getElementById(`expand-hint-${idx}`);
+                            if (expDiv.style.display === 'none') {
+                                expDiv.style.display = 'block';
+                                hintDiv.style.display = 'none';
+                                expDiv.innerHTML = 'Loading explanation...';
+                                // Send request to backend for explanation
+                                const expResponse = await fetch('/explain_microbe', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        name: microbe.name,
+                                        soil_conditions: microbe.explanation
+                                    })
+                                });
+                                const expData = await expResponse.json();
+                                // Replace *text* with <strong>text</strong>
+                                let explanationHtml = expData.explanation.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+                                expDiv.innerHTML = `<em>${explanationHtml}</em>`;
+                            } else {
+                                expDiv.style.display = 'none';
+                                hintDiv.style.display = 'block';
+                            }
+                        });
+                        predictionsDiv.appendChild(microbeDiv);
+                    });
+                } else {
+                    predictionsDiv.innerHTML = `<div class='error'>${data.message || 'No microbes found for the given soil characteristics. Try adjusting the values.'}</div>`;
+                }
+                resultsDiv.style.display = 'block';
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html> 
