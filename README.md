@@ -14,6 +14,20 @@ This application predicts probable soil microbes based on soil characteristics, 
 - Provides explanations for predictions (with Gemini) 🤖
 - Focused on Polish soil conditions 🇵🇱
 
+---
+
+### 🖼️ App Screenshots
+
+**Input Form:**
+
+![Input Form](Input.png)
+
+**Predicted Microbes:**
+
+![Predicted Microbes](Predicted.png)
+
+---
+
 ## 🚀 Setup
 
 1. Create a virtual environment:
