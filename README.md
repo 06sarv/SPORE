@@ -20,11 +20,11 @@ This application predicts probable soil microbes based on soil characteristics, 
 
 **Input Form:**
 
-![Input Form](Input.png)
+![Input Form](static/Input.png)
 
 **Predicted Microbes:**
 
-![Predicted Microbes](Predicted.png)
+![Predicted Microbes](static/Predicted.png)
 
 ---
 
@@ -51,7 +51,8 @@ python app.py
 ## 📚 Data Sources
 
 This app uses:
-- **European Soil Database (ESDB):** for soil characteristics and polygons in Poland. 🗺️
+- **European Soil Database (ESDB):** for soil characteristics and polygons in Poland. 🗺️  
+  **Reference:** The European Soil Database distribution version 2.0, European Commission and the European Soil Bureau Network, CD-ROM, EUR 19945 EN, 2004.
 - **GBIF (Global Biodiversity Information Facility):** for occurrence data of soil microbes in Poland. See [GBIF](https://www.gbif.org/) for more information. 🌍
 
 If you use this app or its data for research, please cite GBIF and ESDB appropriately.
