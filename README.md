@@ -1,4 +1,4 @@
-# 🌱 Soil Microbe Predictor - Poland 
+# 🌱 SPORE- Soil-based Prediction Of Resident Entities
 
 This application predicts probable soil microbes based on soil characteristics, specifically for Polish soils. 
 
